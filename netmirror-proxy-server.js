@@ -44,6 +44,7 @@ const server = http.createServer((req, res) => {
       'X-Requested-With': query.xreq || 'NetmirrorNewTV v1.0',
       'User-Agent': query.ua || 'Mozilla/5.0',
       'Referer': query.ref || 'https://net52.cc',
+      'Origin': query.origin || '',
     },
     rejectUnauthorized: false,
   };

@@ -2,7 +2,7 @@
  * NetMirror provider - routes through Cloudflare Worker proxy
  * Worker URL can be set via CF_WORKER_URL env var, or defaults below
  */
-const PROXY_BASE = process.env.NETMIRROR_PROXY || process.env.CF_WORKER_URL || 'https://leotard-paddling-famine.ngrok-free.dev/?target=';
+const PROXY_BASE = process.env.NETMIRROR_PROXY || process.env.CF_WORKER_URL || 'https://proxy.rchimezie.com/?target=';
 
 async function proxyFetch(url, options = {}) {
   const targetEncoded = encodeURIComponent(url);

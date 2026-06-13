@@ -172,6 +172,23 @@ function getPlaylistHeaders(referer) {
 }
 
 /* ---------------------------------
+ * Proxy support (routes vixsrc.to through Hermes tunnel to avoid Cloudflare blocks)
+ * --------------------------------- */
+const PROXY_BASE = process.env.VIXSRC_PROXY || process.env.NETMIRROR_PROXY || 'https://proxy.rchimezie.com/?target=';
+
+async function proxyFetch(url, options = {}) {
+  const targetEncoded = encodeURIComponent(url);
+  let targetUrl = PROXY_BASE + targetEncoded;
+
+  // Forward headers that vixsrc.to needs
+  const headers = options.headers || {};
+  if (headers.Referer) targetUrl += '&ref=' + encodeURIComponent(headers.Referer);
+  if (headers.Origin) targetUrl += '&origin=' + encodeURIComponent(headers.Origin);
+
+  return fetch(targetUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+}
+
+/* ---------------------------------
  * Parsing helpers
  * --------------------------------- */
 
@@ -470,7 +487,7 @@ async function getStreams(id, mediaType, season, episode, options = null) {
   try {
     console.log(`[VixSrc] Fetching API: ${apiUrl}`);
 
-    const apiRes = await fetch(apiUrl, { headers: commonHeaders });
+    const apiRes = await proxyFetch(apiUrl, { headers: commonHeaders });
     if (!apiRes.ok) {
       console.error(`[VixSrc] API request failed: ${apiRes.status}`);
       return [];
@@ -516,7 +533,7 @@ async function getStreams(id, mediaType, season, episode, options = null) {
 
     console.log(`[VixSrc] Fetching embed: ${embedUrl}`);
 
-    const embedRes = await fetch(embedUrl, { headers: getEmbedHeaders() });
+    const embedRes = await proxyFetch(embedUrl, { headers: getEmbedHeaders() });
     if (!embedRes.ok) {
       console.error(`[VixSrc] Embed request failed: ${embedRes.status}`);
       return [];
@@ -545,7 +562,7 @@ async function getStreams(id, mediaType, season, episode, options = null) {
     let quality = "1080p";
 
     try {
-      const playlistRes = await fetch(playlistUrl, {
+      const playlistRes = await proxyFetch(playlistUrl, {
         headers: playlistHeaders,
       });
       if (playlistRes.ok) {
