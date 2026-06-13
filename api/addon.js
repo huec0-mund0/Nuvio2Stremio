@@ -69,6 +69,7 @@ async function handleRequest(req, res) {
       { name: 'GoatAPI', url: 'https://api.ghpool.xyz/goatapi/search?tmdb=123&type=movie', headers: {} },
       { name: 'VixSrc API', url: 'https://vixsrc.to/api/movie/550', headers: {'User-Agent': 'Mozilla/5.0','Referer': 'https://vixsrc.to/'} },
       { name: 'VixSrc Embed', url: 'https://vixsrc.to/', headers: {'User-Agent': 'Mozilla/5.0'} },
+      { name: 'VixSrc via Proxy', url: 'https://proxy.rchimezie.com/?target=' + encodeURIComponent('https://vixsrc.to/api/movie/550'), headers: {'User-Agent': 'Mozilla/5.0'} },
     ];
     for (const t of testUrls) {
       const r = { status: null, error: null, body_preview: null };
