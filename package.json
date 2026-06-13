@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Stremio addon with multiple streaming providers",
   "main": "api/addon.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "cheerio-without-node-native": "^1.0.0-rc.2",
     "crypto-js": "^4.2.0",
+    "express": "^4.18.2",
     "node-forge": "^1.3.1"
   }
 }
