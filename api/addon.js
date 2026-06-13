@@ -89,6 +89,47 @@ async function handleRequest(req, res) {
     return res.status(200).json(manifest);
   }
 
+  // Stream proxy — routes video/playlist requests through the tunnel
+  // Stremio clients that don't respect stream.headers can still play
+  if (path.startsWith('/proxy/')) {
+    const target = decodeURIComponent(path.slice(7));
+    if (!target) return res.status(400).json({ error: 'missing target' });
+
+    try {
+      const proxyUrl = 'https://proxy.rchimezie.com/?target=' + encodeURIComponent(target);
+      const resp = await fetch(proxyUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0' },
+        signal: AbortSignal.timeout(30000),
+      });
+
+      // Forward relevant headers
+      if (resp.headers.get('content-type')) res.setHeader('Content-Type', resp.headers.get('content-type'));
+      if (resp.headers.get('content-length')) res.setHeader('Content-Length', resp.headers.get('content-length'));
+
+      const text = await resp.text();
+      const ct = resp.headers.get('content-type') || '';
+
+      // For m3u8 playlists, rewrite segment URLs to go through proxy
+      if (ct.includes('m3u8') || ct.includes('application/vnd.apple.mpegurl') || target.includes('.m3u8')) {
+        const baseUrl = target.substring(0, target.lastIndexOf('/') + 1);
+        const addonBase = `https://${req.headers.host}/proxy/`;
+
+        const rewritten = text.replace(/^(https?:\/\/[^\s]+)$/gm, (match) => {
+          return addonBase + encodeURIComponent(match);
+        }).replace(/^([a-zA-Z0-9_\-./]+\.(ts|m3u8|m3u|key|m4s))$/gm, (match) => {
+          const absUrl = baseUrl + match;
+          return addonBase + encodeURIComponent(absUrl);
+        });
+
+        return res.status(200).send(rewritten);
+      }
+
+      return res.status(200).send(text);
+    } catch (e) {
+      return res.status(502).json({ error: e.message });
+    }
+  }
+
   // Stream request: /stream/:type/:id.json
   const match = path.match(/^\/stream\/(movie|series)\/(.+?)\.json$/);
   if (match) {

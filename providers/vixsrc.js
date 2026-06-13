@@ -175,6 +175,7 @@ function getPlaylistHeaders(referer) {
  * Proxy support (routes vixsrc.to through Hermes tunnel to avoid Cloudflare blocks)
  * --------------------------------- */
 const PROXY_BASE = process.env.VIXSRC_PROXY || process.env.NETMIRROR_PROXY || 'https://proxy.rchimezie.com/?target=';
+const STREAM_PROXY_BASE = process.env.ADDON_URL || 'https://nuvio2stremio.onrender.com';
 
 async function proxyFetch(url, options = {}) {
   const targetEncoded = encodeURIComponent(url);
@@ -631,10 +632,10 @@ async function getStreams(id, mediaType, season, episode, options = null) {
     const stream = {
       name: `🎦 VixSrc | ${quality} • ${audioLabel}`,
       title,
-      url: playlistUrl,
+      url: STREAM_PROXY_BASE + '/proxy/' + encodeURIComponent(playlistUrl),
       easyProxySourceUrl: embedUrl,
       quality: quality.toLowerCase().includes("p") ? quality : "1080p",
-      type: "url",
+      type: "hls",
       headers: playlistHeaders,
       behaviorHints: {
         notWebReady: false,

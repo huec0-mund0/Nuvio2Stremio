@@ -3,6 +3,7 @@
  * Worker URL can be set via CF_WORKER_URL env var, or defaults below
  */
 const PROXY_BASE = process.env.NETMIRROR_PROXY || process.env.CF_WORKER_URL || 'https://proxy.rchimezie.com/?target=';
+const STREAM_PROXY_BASE = process.env.ADDON_URL || 'https://nuvio2stremio.onrender.com';
 
 async function proxyFetch(url, options = {}) {
   const targetEncoded = encodeURIComponent(url);
@@ -162,7 +163,7 @@ async function getStreams(id, type, season, episode, mediaTitle) {
           streams.push({
             name: service.name,
             title: 'Auto',
-            url: videoUrl,
+            url: STREAM_PROXY_BASE + '/proxy/' + encodeURIComponent(videoUrl),
             quality: 'Auto',
             type: isHls ? 'hls' : (videoUrl.includes('.mp4') || videoUrl.includes('.mkv') ? 'video' : null),
             headers: { Referer: playerData.referer || '', 'User-Agent': 'Mozilla/5.0' },
@@ -179,7 +180,7 @@ async function getStreams(id, type, season, episode, mediaTitle) {
                 streams.push({
                   name: service.name,
                   title: q.quality,
-                  url: q.url,
+                  url: STREAM_PROXY_BASE + '/proxy/' + encodeURIComponent(q.url),
                   quality: q.quality,
                   type: 'hls',
                   headers: { Referer: playerData.referer || '', 'User-Agent': 'Mozilla/5.0' },
