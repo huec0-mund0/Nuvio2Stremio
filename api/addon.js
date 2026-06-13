@@ -67,6 +67,8 @@ async function handleRequest(req, res) {
       { name: 'NetMirror API', url: 'https://tv.imgcdn.kim/newtv/search.php?s=Deadpool', headers: {'User-Agent': 'Mozilla/5.0','x-requested-with':'NetmirrorNewTV v1.0'} },
       { name: 'ZinkMovies', url: 'https://new1.zinkmovies.foo', headers: {} },
       { name: 'GoatAPI', url: 'https://api.ghpool.xyz/goatapi/search?tmdb=123&type=movie', headers: {} },
+      { name: 'VixSrc API', url: 'https://vixsrc.to/api/movie/550', headers: {'User-Agent': 'Mozilla/5.0','Referer': 'https://vixsrc.to/'} },
+      { name: 'VixSrc Embed', url: 'https://vixsrc.to/', headers: {'User-Agent': 'Mozilla/5.0'} },
     ];
     for (const t of testUrls) {
       const r = { status: null, error: null, body_preview: null };
