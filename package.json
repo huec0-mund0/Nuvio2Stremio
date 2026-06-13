@@ -4,9 +4,7 @@
   "description": "Stremio addon with multiple streaming providers",
   "main": "api/addon.js",
   "dependencies": {
-    "axios": "^1.9.0",
-    "cheerio": "^1.0.0",
-    "crypto-js": "^4.2.0",
-    "string-similarity": "^4.0.4"
+    "cheerio-without-node-native": "^1.0.0-rc.2",
+    "crypto-js": "^4.2.0"
   }
 }

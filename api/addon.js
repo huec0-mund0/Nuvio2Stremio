@@ -72,7 +72,7 @@ async function handleRequest(req, res) {
         .then(s => allSources.push(...s)));
     }
     if (enabled.includes('hdhub4u') && meta?.tmdbId) {
-      tasks.push(getHDHub4uStreams(meta.tmdbId, type, meta.title, meta.year, season, episode)
+      tasks.push(getHDHub4uStreams(meta.tmdbId, type, season, episode)
         .then(s => allSources.push(...s)));
     }
     if (enabled.includes('cinemm')) {
