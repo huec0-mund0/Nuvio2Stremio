@@ -7,8 +7,7 @@ const { getStreams: getHDHub4uStreams } = require('../providers/hdhub4u');
 const { getStreams: getPurStreamStreams } = require('../providers/purstream');
 const { getStreams: getNetMirrorStreams } = require('../providers/netmirror');
 const { getStreams: getZinkMoviesStreams } = require('../providers/zinkmovies');
-const { getStreams: get4kHDHubStreams } = require('../providers/4khdhub');
-const { getStreams: get4kHDHubNewStreams } = require('../providers/4khdhubnew');
+const { getStreams: get4kHDHubStreams } = require('../providers/4khdhubnew');
 const manifest = require('../manifest.json');
 
 // ── Helpers ────────────────────────────────────────────────
@@ -168,7 +167,7 @@ async function handleRequest(req, res) {
 
     const allSources = [];
     const start = Date.now();
-    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies,4khdhub,4khdhubnew';
+    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies,4khdhub';
     const enabled = ENABLED.split(',').map(s => s.trim().toLowerCase());
 
     const tasks = [];
@@ -206,19 +205,23 @@ async function handleRequest(req, res) {
     }
     if (enabled.includes('4khdhub') && meta?.tmdbId) {
       tasks.push(
-        withTimeout(get4kHDHubStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
-          .catch(() => {})
-      );
-    }
-    if (enabled.includes('4khdhubnew') && meta?.tmdbId) {
-      tasks.push(
-        withTimeout(get4kHDHubNewStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+        withTimeout(get4kHDHubStreams(meta.tmdbId, type, season, episode).then(s => {
+          // 4KHDHub returns direct file URLs - ensure they have proper type for Stremio
+          const fixed = s.map(st => ({
+            ...st,
+            // Detect type from URL if not set
+            type: st.type || (st.url && st.url.includes('.m3u8') ? 'hls' : undefined),
+            // Add name prefix so users know these are direct file streams
+            name: st.name && !st.name.startsWith('4KHDHub') ? '4KHDHub | ' + st.name : st.name,
+          }));
+          allSources.push(...fixed);
+        }), 25000) // 25s timeout - 4khdhubnew is slow (7s+ locally)
           .catch(() => {})
       );
     }
 
     // Overall timeout so Render doesn't kill us
-    await withTimeout(Promise.allSettled(tasks), 25000).catch(() => {});
+    await withTimeout(Promise.allSettled(tasks), 30000).catch(() => {});
     console.log(`[Nuvio] ${imdbId} → ${allSources.length} streams in ${Date.now()-start}ms`);
 
     return res.status(200).json({ streams: allSources });
