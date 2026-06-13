@@ -206,12 +206,12 @@ async function handleRequest(req, res) {
     if (enabled.includes('4khdhub') && meta?.tmdbId) {
       tasks.push(
         withTimeout(get4kHDHubStreams(meta.tmdbId, type, season, episode).then(s => {
-          // 4KHDHub returns direct file URLs - ensure they have proper type for Stremio
+          // 4KHDHub returns direct file URLs - proxy them through tunnel for geo-access
+          const addonBase = `https://nuvio2stremio.onrender.com/proxy/`;
           const fixed = s.map(st => ({
             ...st,
-            // Detect type from URL if not set
-            type: st.type || (st.url && st.url.includes('.m3u8') ? 'hls' : undefined),
-            // Add name prefix so users know these are direct file streams
+            // Route through addon proxy so TV in Nigeria can reach them
+            url: st.url ? addonBase + encodeURIComponent(st.url) : st.url,
             name: st.name && !st.name.startsWith('4KHDHub') ? '4KHDHub | ' + st.name : st.name,
           }));
           allSources.push(...fixed);
