@@ -83,6 +83,9 @@ function matchAllTitles(results, title) {
 async function getStreams(id, type, season, episode, mediaTitle) {
   console.log(`[NetMirror] Starting search for ${type} ${id} title="${mediaTitle || '?'}"`);
   const streams = [];
+  
+  // Normalize type — Stremio passes 'series' but API expects 'tv'
+  const normalizedType = type === 'series' ? 'tv' : type;
 
   try {
     const apiBase = await getNfMirrorApi();
@@ -115,7 +118,7 @@ async function getStreams(id, type, season, episode, mediaTitle) {
 
         let contentId = match.id;
 
-        if (type === 'tv' && season && episode) {
+        if (normalizedType === 'tv' && season && episode) {
           console.log(`[NetMirror] TV Match on ${service.name}, ID: ${match.id}, looking for S${season}E${episode}`);
           
           // Try all exact title matches — some may be wrong entries with no matching season
