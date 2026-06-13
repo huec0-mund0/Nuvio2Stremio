@@ -105,36 +105,42 @@ async function handleRequest(req, res) {
         signal: AbortSignal.timeout(30000),
       });
 
-      // Forward relevant headers (except Content-Type — we'll set it after detection)
-      if (resp.headers.get('content-length')) res.setHeader('Content-Length', resp.headers.get('content-length'));
+      const isM3u8 = (resp.headers.get('content-type') || '').includes('m3u8')
+        || (resp.headers.get('content-type') || '').includes('apple.mpegurl')
+        || target.includes('.m3u8');
 
-      const text = await resp.text();
-      let ct = resp.headers.get('content-type') || '';
-
-      // Fix mislabeled video segments — freecdn disguises MPEG-TS as .js
-      if (target.includes('.js') && text.length > 4 && text.charCodeAt(0) === 0x47) {
-        ct = 'video/MP2T';
-      }
-
-      // Now set the corrected Content-Type
-      res.setHeader('Content-Type', ct);
-
-      // For m3u8 playlists, rewrite segment URLs to go through proxy
-      if (ct.includes('m3u8') || ct.includes('application/vnd.apple.mpegurl') || target.includes('.m3u8')) {
+      if (isM3u8) {
+        // Read as text so we can rewrite segment URLs
+        const text = await resp.text();
         const baseUrl = target.substring(0, target.lastIndexOf('/') + 1);
         const addonBase = `https://${req.headers.host}/proxy/`;
 
-        const rewritten = text.replace(/^(https?:\/\/[^\s]+)$/gm, (match) => {
-          return addonBase + encodeURIComponent(match);
-        }).replace(/^([a-zA-Z0-9_\-./]+\.(ts|m3u8|m3u|key|m4s|js))$/gm, (match) => {
-          const absUrl = baseUrl + match;
-          return addonBase + encodeURIComponent(absUrl);
-        });
+        // Strip \r so $ assertions work in multiline regex
+        const cleanText = text.replace(/\r/g, '');
+        const rewritten = cleanText
+          .replace(/^(https?:\/\/[^\s]+)$/gm, (match) => addonBase + encodeURIComponent(match))
+          .replace(/^([a-zA-Z0-9_\-./]+\.(ts|m3u8|m3u|key|m4s|js|jpg))$/gm, (match) => {
+            const absUrl = baseUrl + match;
+            return addonBase + encodeURIComponent(absUrl);
+          });
 
+        res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
         return res.status(200).send(rewritten);
       }
 
-      return res.status(200).send(text);
+      // Binary segments — pipe raw, fix content type if MPEG-TS disguised as .js/.jpg
+      if (resp.headers.get('content-length')) res.setHeader('Content-Length', resp.headers.get('content-length'));
+
+      const buffer = Buffer.from(await resp.arrayBuffer());
+      let ct = resp.headers.get('content-type') || 'application/octet-stream';
+
+      // Detect MPEG-TS disguised as .js/.jpg and fix content type
+      if (buffer.length > 4 && buffer[0] === 0x47) {
+        ct = 'video/MP2T';
+      }
+
+      res.setHeader('Content-Type', ct);
+      return res.status(200).send(buffer);
     } catch (e) {
       return res.status(502).json({ error: e.message });
     }
