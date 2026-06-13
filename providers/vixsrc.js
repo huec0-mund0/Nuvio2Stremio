@@ -193,7 +193,7 @@ async function proxyFetch(url, options = {}) {
  * --------------------------------- */
 
 function extractEmbedSrcFromApiPayload(payload) {
-  const url = payload && typeof payload === "object" ? payload.url : null;
+  const url = payload && typeof payload === "object" ? (payload.url || payload.src) : null;
   if (!url) return null;
 
   try {
