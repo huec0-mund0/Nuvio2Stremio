@@ -50,6 +50,27 @@ async function handleRequest(req, res) {
   res.setHeader('Access-Control-Allow-Headers', '*');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
+  // Debug: check provider reachability from this server
+  if (path === '/debug') {
+    const results = {};
+    const testUrls = [
+      { name: 'NetMirror API', url: 'https://tv.imgcdn.kim/newtv/search.php?s=Deadpool', headers: {'User-Agent': 'Mozilla/5.0','x-requested-with':'NetmirrorNewTV v1.0'} },
+      { name: 'ZinkMovies', url: 'https://new1.zinkmovies.foo', headers: {} },
+      { name: 'GoatAPI', url: 'https://api.ghpool.xyz/goatapi/search?tmdb=123&type=movie', headers: {} },
+    ];
+    for (const t of testUrls) {
+      const r = { status: null, error: null, body_preview: null };
+      try {
+        const resp = await fetch(t.url, { headers: t.headers, signal: AbortSignal.timeout(10000) });
+        r.status = resp.status;
+        const text = await resp.text();
+        r.body_preview = text.slice(0, 200);
+      } catch(e) { r.error = e.message; }
+      results[t.name] = r;
+    }
+    return res.status(200).json(results);
+  }
+
   // Manifest
   if (path === '/manifest.json') {
     return res.status(200).json(manifest);
