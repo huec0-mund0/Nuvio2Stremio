@@ -120,6 +120,13 @@ async function handleRequest(req, res) {
         const rewritten = cleanText
           // First rewrite inline URI="..." attributes in HLS tags (audio, subs, etc.)
           .replace(/URI="(https?:\/\/[^"]+)"/g, (_m, url) => `URI="${addonBase}${encodeURIComponent(url)}"`)
+          // Also rewrite inline URI="/absolute/path" to full proxy URL
+          .replace(/URI="\/([^"]+)"/g, (_m, path) => {
+            // Resolve relative to the target URL's origin
+            const targetUrl = new URL(target);
+            const absUrl = `${targetUrl.protocol}//${targetUrl.host}/${path}`;
+            return `URI="${addonBase}${encodeURIComponent(absUrl)}"`;
+          })
           // Then rewrite standalone full URLs
           .replace(/^(https?:\/\/[^\s]+)$/gm, (match) => addonBase + encodeURIComponent(match))
           // Then rewrite relative paths
