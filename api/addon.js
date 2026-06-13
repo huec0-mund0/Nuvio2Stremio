@@ -89,7 +89,7 @@ async function handleRequest(req, res) {
   const match = path.match(/^\/stream\/(movie|series)\/(.+?)\.json$/);
   if (match) {
     const type = match[1];
-    const fullId = match[2];
+    const fullId = decodeURIComponent(match[2]);
     const { imdbId, season, episode } = parseId(fullId);
     const meta = await resolveMeta(imdbId, type);
 
