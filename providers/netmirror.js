@@ -145,29 +145,17 @@ async function getStreams(id, type, season, episode, mediaTitle) {
               continue;
             }
 
-            let episodeId = null;
-            let page = 1;
-            while (!episodeId && page < 10) {
-              const epResp = await proxyFetch(
-                `${apiBase}/episodes.php?season_id=${seasonMatch.id}&page=${page}`,
-                { headers: { 'ott': service.code, 'x-requested-with': 'NetmirrorNewTV v1.0', 'User-Agent': 'Mozilla/5.0' } }
-              );
-              const epText = await epResp.text();
-              let epData;
-              try { epData = JSON.parse(epText); } catch { break; }
-              
-              const episodes = epData.episodes || [];
-              const epMatch = episodes.find(e => e.ep && parseInt(e.ep) === parseInt(episode));
-              if (epMatch && epMatch.id) { episodeId = epMatch.id; }
-              if (parseInt(epData.nextPageShow) !== 1) break;
-              page++;
-            }
+            // Episodes are in the post.php response directly (top-level episodes field)
+            const episodeList = postData.episodes || [];
+            const epMatch = episodeList.find(e => e.ep && parseInt(e.ep) === parseInt(episode));
             
-            if (episodeId) {
-              contentId = episodeId;
+            if (epMatch && epMatch.id) {
+              contentId = epMatch.id;
               episodeFound = true;
-              console.log(`[NetMirror] Found episode, ID: ${episodeId}`);
+              console.log(`[NetMirror] Found episode, ID: ${epMatch.id}`);
               break; // Found the right entry, stop trying candidates
+            } else {
+              console.log(`[NetMirror] Episode ${episode} not found in candidate ${cid} (${episodeList.length} episodes)`);
             }
           }
           
