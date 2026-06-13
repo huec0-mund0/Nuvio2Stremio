@@ -28,7 +28,7 @@ function extractYear(str) {
 }
 
 async function getTmdbSearchMeta(tmdbId, type) {
-  const mediaType = type === 'tv' ? 'tv' : 'movie';
+  const mediaType = (type === 'tv' || type === 'series') ? 'tv' : 'movie';
   try {
     const resp = await fetch(`https://api.themoviedb.org/3/${mediaType}/${tmdbId}?language=fr-FR&api_key=${TMDB_KEY}`);
     if (!resp.ok) return null;
@@ -149,7 +149,7 @@ async function getStreams(id, type, season, episode) {
 
     let sources = [];
 
-    if (type === 'tv' && season && episode) {
+    if ((type === 'tv' || type === 'series') && season && episode) {
       sources = await getEpisodeSources(purstreamId, season, episode);
       console.log(`[PurStream] Got ${sources.length} episode sources`);
 

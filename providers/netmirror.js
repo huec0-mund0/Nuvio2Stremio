@@ -1,1 +1,209 @@
-const _0x2a0f0d=_0x10a5;function _0x4531(){const _0x2f6481=['ntK4ndy4yMvpBKfY','BgvUz3rO','mZK1ntC2vfLTq0f4','Dg9tDhjPBMC','D2fYBG','ksbVBIa','ig5VDcbMB3vUzcbVBIa','zgvMAw5LuhjVCgvYDgLLCW','C3bSAxq','Ahr0Chm6lY9HCgKUDgHLBw92AwvKyI5VCMCVmW','DMLKzw9FBgLUAW','ndaWnZu1CxLRs0Tr','igzVCIaI','zM9YrwfJAa','Dg9mB3DLCKnHC2u','Ahr0Chm6lY90DI5PBwDJzg4UA2LTl25LD3r2','ChvZAa','BMv0BwLYCM9Y','BwfW','mZa1ndKWotbXEeXUCg0','ANnVBG','vxnLCI1bz2vUDa','w05LDe1PCNjVCL0Gu2vHC29Uia','zgvMAw5LuhjVCgvYDhK','w05LDe1PCNjVCL0GrMv0y2HPBMCGzMLUywWGC3rYzwfTihbHEwXVywqGzM9YieLeia','nZiW','mte5ntG2mJbQrfDtCuO','w05LDe1PCNjVCL0GrMf0ywWGB3zLCMfSBcbLEhrYywn0Aw9UigzHAwX1CMu6','ihn0CMvHBsHZks4','BgfZDeLUzgv4t2y','DMfSDwu','4Ocl4Ocl4Ocl4Ocl','l2vWAxnVzgvZlNbOCd9Pzd0','nZbVEeXTB1a','DhjPBq','y2f0y2G','yxv0BW','tw96AwXSys81lJaGkfDPBMrVD3mGtLqGmtaUmdSGv2LUnJq7ihG2ncKGCNy6mtm2lJaPieDLy2TVlZiWmtaWmtaXiezPCMvMB3GVmtm2lJaGl09tlKDHDhvozxDuvIb2ms4W','C3rHCNrZv2L0Aa','w05LDe1PCNjVCL0Gu3rHCNrPBMCGC2vHCMnOigzVCIa','w05LDe1PCNjVCL0GrxjYB3iGzNjVBsbZzxj2AwnLia','zMLUza','mta4ma','mZe0mtGWmvf4r0fUBq','ywXS','nZqXodLHquTfvwu','Btn1oa','DgHYB3C','Bg9N','icHjrdOG','BMfTzq','Dgv4Da','lM0ZDtG','Aw5JBhvKzxm','nLrit0P6sW','DwHK','yxbWBhK','zxjYB3i','CxvHBgL0Eq','B3jPz2LU','BwvZC2fNzq','CMvMzxjLCG','ndjtAgn5yKy','mJe2ma','ksWGzhjPBgXPBMCGzg93BIb0BYbt','jNbHz2u9','mJz3z3v1u0i','tMv0zMXPEa','w05LDe1PCNjVCL0GrxbPC29Kzsa'];_0x4531=function(){return _0x2f6481;};return _0x4531();}(function(_0x2de3bc,_0x351406){const _0x47f918={_0x525614:0x1ac,_0x153244:0x175,_0x3a8dd5:0x1a8,_0x4c13ba:0x18b,_0x13d494:0x16c,_0x338e20:0x195,_0x1e1dae:0x17d},_0xebb8cd=_0x10a5,_0x47f20c=_0x2de3bc();while(!![]){try{const _0x50f63a=parseInt(_0xebb8cd(0x197))/0x1*(-parseInt(_0xebb8cd(_0x47f918._0x525614))/0x2)+parseInt(_0xebb8cd(0x1a0))/0x3*(-parseInt(_0xebb8cd(0x16a))/0x4)+parseInt(_0xebb8cd(_0x47f918._0x153244))/0x5*(-parseInt(_0xebb8cd(_0x47f918._0x3a8dd5))/0x6)+parseInt(_0xebb8cd(_0x47f918._0x4c13ba))/0x7*(parseInt(_0xebb8cd(_0x47f918._0x13d494))/0x8)+parseInt(_0xebb8cd(_0x47f918._0x338e20))/0x9+-parseInt(_0xebb8cd(0x184))/0xa+parseInt(_0xebb8cd(_0x47f918._0x1e1dae))/0xb;if(_0x50f63a===_0x351406)break;else _0x47f20c['push'](_0x47f20c['shift']());}catch(_0x1fcbcc){_0x47f20c['push'](_0x47f20c['shift']());}}}(_0x4531,0x9284b));var __defProp=Object[_0x2a0f0d(0x181)],__defProps=Object[_0x2a0f0d(0x171)],__getOwnPropDescs=Object['getOwnPropertyDescriptors'],__getOwnPropSymbols=Object['getOwnPropertySymbols'],__hasOwnProp=Object['prototype']['hasOwnProperty'],__propIsEnum=Object['prototype']['propertyIsEnumerable'],__defNormalProp=(_0x92b10d,_0x194e92,_0x81782a)=>_0x194e92 in _0x92b10d?__defProp(_0x92b10d,_0x194e92,{'enumerable':!![],'configurable':!![],'writable':!![],'value':_0x81782a}):_0x92b10d[_0x194e92]=_0x81782a,__spreadValues=(_0x2d0e9e,_0x4b5223)=>{for(var _0xa2f427 in _0x4b5223||(_0x4b5223={}))if(__hasOwnProp['call'](_0x4b5223,_0xa2f427))__defNormalProp(_0x2d0e9e,_0xa2f427,_0x4b5223[_0xa2f427]);if(__getOwnPropSymbols)for(var _0xa2f427 of __getOwnPropSymbols(_0x4b5223)){if(__propIsEnum['call'](_0x4b5223,_0xa2f427))__defNormalProp(_0x2d0e9e,_0xa2f427,_0x4b5223[_0xa2f427]);}return _0x2d0e9e;},__spreadProps=(_0x349e95,_0x4434e2)=>__defProps(_0x349e95,__getOwnPropDescs(_0x4434e2)),__async=(_0x2e576b,_0x14a341,_0x18adea)=>{const _0x56e5c9={_0x5a2ff4:0x199};return new Promise((_0x4d4778,_0x51c7a5)=>{const _0x3a289b=_0x10a5;var _0x3f27ba=_0x2d9836=>{try{_0x12b329(_0x18adea['next'](_0x2d9836));}catch(_0x16f0a1){_0x51c7a5(_0x16f0a1);}},_0x5ac59b=_0xfcf8e8=>{const _0xad4eac=_0x10a5;try{_0x12b329(_0x18adea[_0xad4eac(_0x56e5c9._0x5a2ff4)](_0xfcf8e8));}catch(_0x5e7cd8){_0x51c7a5(_0x5e7cd8);}},_0x12b329=_0x108110=>_0x108110['done']?_0x4d4778(_0x108110['value']):Promise['resolve'](_0x108110[_0x3a289b(0x188)])['then'](_0x3f27ba,_0x5ac59b);_0x12b329((_0x18adea=_0x18adea[_0x3a289b(0x1a2)](_0x2e576b,_0x14a341))['next']());});},CONFIG_URL='https://raw.githubusercontent.com/SaurabhKaperwan/Utils/refs/heads/main/urls.json',FALLBACK_NF_API=_0x2a0f0d(0x179),OTT_SERVICES=[{'code':'nf','name':_0x2a0f0d(0x1ad)},{'code':'pv','name':'PrimeVideo'},{'code':'hs','name':'Hotstar'}],TMDB_API_KEY='439c478a771f35c05022f9feabcca01c',TMDB_BASE_URL=_0x2a0f0d(0x173);function getNfMirrorApi(){const _0x1e6276={_0x3e9fb8:0x16e};return __async(this,null,function*(){const _0x58ff48=_0x10a5;try{const _0x27bbf8=yield fetch(CONFIG_URL),_0x373c1c=yield _0x27bbf8['json']();return _0x373c1c['nfmirror']||FALLBACK_NF_API;}catch(_0x37d2b4){return console[_0x58ff48(_0x1e6276._0x3e9fb8)]('[NetMirror]\x20Using\x20fallback\x20API\x20URL:',FALLBACK_NF_API),FALLBACK_NF_API;}});}function getMediaDetails(_0x10b325,_0x46a0f6){const _0x115ab1={_0x4d8751:0x17e};return __async(this,null,function*(){const _0x385813=_0x10a5,_0xcc0bd=_0x46a0f6==='tv'?'tv':'movie',_0x17ae5f=TMDB_BASE_URL+'/'+_0xcc0bd+'/'+_0x10b325+'?api_key='+TMDB_API_KEY,_0x25f69a=yield fetch(_0x17ae5f);return _0x25f69a[_0x385813(_0x115ab1._0x4d8751)]();});}function generateM3u8(_0x136669){const _0x5ad403={_0x407c31:0x19a,_0x2a1770:0x19d,_0x2890ad:0x172,_0x3e5f8e:0x190};return __async(this,arguments,function*(_0x64729c,_0x1c39cc={}){const _0x3b4cd0=_0x10a5;try{console[_0x3b4cd0(_0x5ad403._0x407c31)]('[NetMirror]\x20Parsing\x20master\x20m3u8:\x20'+_0x64729c);const _0x362df7=yield fetch(_0x64729c,{'headers':_0x1c39cc}),_0x48af33=yield _0x362df7[_0x3b4cd0(_0x5ad403._0x2a1770)](),_0x2c8f9c=_0x64729c['substring'](0x0,_0x64729c[_0x3b4cd0(0x187)]('/'))+'/',_0x177f37=[],_0x3e07f3=/#EXT-X-STREAM-INF:.*?RESOLUTION=(\d+x\d+).*?\n([^\n]+)/g;let _0x533e19;while((_0x533e19=_0x3e07f3['exec'](_0x48af33))!==null){const _0x4ea1c5=parseInt(_0x533e19[0x1][_0x3b4cd0(_0x5ad403._0x2890ad)]('x')[0x1]);if(_0x4ea1c5<0x2d0)continue;const _0x4c9ab=_0x4ea1c5+'p';let _0x4221da=_0x533e19[0x2]['trim']();if(!_0x4221da[_0x3b4cd0(_0x5ad403._0x3e5f8e)]('http')){if(_0x4221da['startsWith']('/')){const _0x24fa1b=new URL(_0x64729c)[_0x3b4cd0(0x1a5)];_0x4221da=_0x24fa1b+_0x4221da;}else _0x4221da=_0x2c8f9c+_0x4221da;}_0x177f37['push']({'quality':_0x4c9ab,'url':_0x4221da});}return _0x177f37;}catch(_0x37ac47){return console['warn']('[NetMirror]\x20Error\x20parsing\x20M3U8,\x20returning\x20empty.',_0x37ac47),[];}});}function getStreams(_0x217a20,_0x284199,_0x330940,_0x4dc845){const _0x18fc4b={_0x7f0e7b:0x196,_0x3884e5:0x1a3,_0x54d413:0x185,_0x533941:0x186,_0x531d98:0x17c},_0x4c12da={_0x32eb9a:0x16e};return __async(this,null,function*(){const _0x19791c=_0x10a5;console[_0x19791c(0x19a)](_0x19791c(0x191)+_0x284199+'\x20'+_0x217a20);const _0x4e0783=[];try{const _0x1a11ea=yield getMediaDetails(_0x217a20,_0x284199),_0x230fc2=_0x284199==='tv'?_0x1a11ea[_0x19791c(0x19c)]:_0x1a11ea['title'];if(!_0x230fc2)return console['log']('[NetMirror]\x20Could\x20not\x20retrieve\x20media\x20title.'),[];const _0x45878f=yield getNfMirrorApi();console['log']('[NetMirror]\x20Resolved\x20API\x20base:\x20'+_0x45878f);const _0xf27bb5=OTT_SERVICES['map'](_0x198fb3=>extractServiceStreams(_0x45878f,_0x198fb3,_0x230fc2,_0x284199,_0x330940,_0x4dc845)[_0x19791c(0x18d)](_0x3f7444=>{const _0x3d17a7=_0x19791c;return console[_0x3d17a7(_0x4c12da._0x32eb9a)](_0x3d17a7(0x192)+_0x198fb3['name']+':',_0x3f7444[_0x3d17a7(0x1a6)]),[];})),_0x860050=yield Promise[_0x19791c(_0x18fc4b._0x7f0e7b)](_0xf27bb5);for(const _0x5ea9d2 of _0x860050){_0x4e0783[_0x19791c(0x17a)](..._0x5ea9d2);}}catch(_0x2f6352){console[_0x19791c(_0x18fc4b._0x3884e5)](_0x19791c(_0x18fc4b._0x54d413),_0x2f6352['message']);}return console[_0x19791c(0x19a)]('[NetMirror]\x20Returning\x20total\x20'+_0x4e0783[_0x19791c(0x16b)]+_0x19791c(_0x18fc4b._0x533941)),_0x4e0783[_0x19791c(_0x18fc4b._0x531d98)](_0x11139c=>__spreadProps(__spreadValues({},_0x11139c),{'quality':getSortedQuality(_0x11139c[_0x19791c(0x1a4)])}));});}function extractServiceStreams(_0x2a0b7d,_0x52161e,_0x1fe256,_0x210363,_0x2eef13,_0x595c9d){const _0x42e212={_0x39ed2e:0x19c,_0x7b2803:0x193,_0x463de2:0x1aa,_0x12dece:0x19a,_0x7901af:0x1ab,_0x4df508:0x170,_0x48ad11:0x182,_0x394157:0x174,_0x1ec403:0x19e,_0x1db8e8:0x1a7,_0x3853b7:0x17f,_0x8d9a83:0x17b,_0x5cd439:0x17f};return __async(this,null,function*(){const _0x19f250=_0x10a5,_0xf23d12=[],_0x14bfd5=_0x1fe256['trim'](),_0x49d584={'ott':_0x52161e['code'],'User-Agent':_0x19f250(0x18f),'x-requested-with':'NetmirrorNewTV\x20v1.0'};console[_0x19f250(0x19a)]('[NetMirror]\x20Searching\x20'+_0x52161e[_0x19f250(_0x42e212._0x39ed2e)]+_0x19f250(0x176)+_0x14bfd5+'\x22');const _0x2b981f=_0x2a0b7d+'/search.php?s='+encodeURIComponent(_0x14bfd5),_0x4cb91f=yield fetch(_0x2b981f,{'headers':_0x49d584}),_0x4b6086=yield _0x4cb91f['json'](),_0x39903c=_0x4b6086['searchResult']||[],_0x575e26=_0x39903c[_0x19f250(_0x42e212._0x7b2803)](_0x5c7c3c=>_0x5c7c3c['t']&&_0x5c7c3c['t'][_0x19f250(0x18c)]()['toLowerCase']()===_0x14bfd5[_0x19f250(0x178)]());if(!_0x575e26||!_0x575e26['id'])return console[_0x19f250(0x19a)]('[NetMirror]\x20No\x20direct\x20match\x20on\x20'+_0x52161e['name']),[];const _0x2c26cb=_0x575e26['id'];let _0x410739=_0x2c26cb;if(_0x210363==='tv'){console['log']('[NetMirror]\x20TV\x20Match\x20on\x20'+_0x52161e[_0x19f250(0x19c)]+_0x19f250(0x19b)+_0x2c26cb+_0x19f250(_0x42e212._0x463de2)+_0x2eef13+'E'+_0x595c9d);const _0x428252=yield fetch(_0x2a0b7d+'/post.php?id='+_0x2c26cb,{'headers':_0x49d584}),_0x3c7bc6=yield _0x428252[_0x19f250(0x17e)](),_0x999014=_0x3c7bc6['season']||[],_0x49e583='Season\x20'+_0x2eef13,_0x13a8c2=_0x999014[_0x19f250(0x193)](_0x1389d2=>_0x1389d2['s']&&_0x1389d2['s']['toString']()['includes'](_0x49e583));if(!_0x13a8c2||!_0x13a8c2['id'])return console[_0x19f250(_0x42e212._0x12dece)](_0x19f250(0x180)+_0x2eef13+'\x20not\x20found\x20on\x20'+_0x52161e[_0x19f250(0x19c)]),[];const _0x5d954e=_0x13a8c2['id'];let _0x2ba8b3=null,_0xaf7566=0x1;while(!_0x2ba8b3&&_0xaf7566<0xa){console[_0x19f250(0x19a)]('[NetMirror]\x20Paging\x20episodes\x20list\x20(Page\x20'+_0xaf7566+_0x19f250(0x16f)+_0x52161e['name']);const _0x2d4455=yield fetch(_0x2a0b7d+_0x19f250(0x18a)+_0x5d954e+_0x19f250(_0x42e212._0x7901af)+_0xaf7566,{'headers':_0x49d584}),_0x2c89f8=yield _0x2d4455['json'](),_0x41078a=_0x2c89f8['episodes']||[],_0x3baeaa=_0x41078a[_0x19f250(0x193)](_0x1d79b9=>_0x1d79b9['ep']&&_0x1d79b9['ep'][_0x19f250(0x16d)]()===_0x595c9d[_0x19f250(0x16d)]());_0x3baeaa&&_0x3baeaa['id']&&(_0x2ba8b3=_0x3baeaa['id']);if(parseInt(_0x2c89f8['nextPageShow'])!==0x1)break;_0xaf7566++;}if(!_0x2ba8b3)return console[_0x19f250(0x19a)](_0x19f250(0x1ae)+_0x595c9d+_0x19f250(_0x42e212._0x4df508)+_0x52161e[_0x19f250(0x19c)]),[];_0x410739=_0x2ba8b3;}console[_0x19f250(0x19a)](_0x19f250(_0x42e212._0x48ad11)+_0x410739+'\x20on\x20'+_0x52161e['name']);const _0x2f648a=yield fetch(_0x2a0b7d+'/player.php?id='+_0x410739,{'headers':_0x49d584}),_0x201efd=yield _0x2f648a[_0x19f250(0x17e)]();if(_0x201efd&&_0x201efd['video_link']){const _0x47f41e=_0x201efd[_0x19f250(_0x42e212._0x394157)],_0x19e2ab=_0x47f41e['includes'](_0x19f250(_0x42e212._0x1ec403));_0xf23d12['push']({'name':_0x52161e[_0x19f250(_0x42e212._0x39ed2e)],'title':'Auto','url':_0x47f41e,'quality':'Auto','type':_0x19e2ab?_0x19f250(0x198):_0x47f41e['includes']('.mp4')||_0x47f41e['includes']('.mkv')?'video':null,'headers':{'Referer':_0x201efd[_0x19f250(_0x42e212._0x1db8e8)]||'','User-Agent':_0x49d584[_0x19f250(_0x42e212._0x3853b7)]},'provider':_0x19f250(_0x42e212._0x8d9a83)});if(_0x19e2ab)try{const _0x5286e1=yield generateM3u8(_0x47f41e,{'Referer':_0x201efd['referer']||'','User-Agent':_0x49d584[_0x19f250(_0x42e212._0x5cd439)]});_0x5286e1[_0x19f250(0x177)](_0x15e13c=>{const _0x2e9c4e=_0x19f250;_0xf23d12[_0x2e9c4e(0x17a)]({'name':_0x52161e['name'],'title':_0x15e13c['quality'],'url':_0x15e13c['url'],'quality':_0x15e13c['quality'],'type':_0x2e9c4e(0x198),'headers':{'Referer':_0x201efd[_0x2e9c4e(0x1a7)]||'','User-Agent':_0x49d584['User-Agent']},'provider':'netmirror'});});}catch(_0x1a21b9){}console['log']('[NetMirror]\x20SUCCESS:\x20Captured\x20link\x20for\x20'+_0x52161e[_0x19f250(0x19c)]);}return _0xf23d12;});}function _0x10a5(_0x402dd8,_0x414aa5){_0x402dd8=_0x402dd8-0x16a;const _0x453148=_0x4531();let _0x10a580=_0x453148[_0x402dd8];if(_0x10a5['RkqNtF']===undefined){var _0x5d8951=function(_0x3c7f51){const _0x5828cc='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x92b10d='',_0x194e92='';for(let _0x81782a=0x0,_0x2d0e9e,_0x4b5223,_0xa2f427=0x0;_0x4b5223=_0x3c7f51['charAt'](_0xa2f427++);~_0x4b5223&&(_0x2d0e9e=_0x81782a%0x4?_0x2d0e9e*0x40+_0x4b5223:_0x4b5223,_0x81782a++%0x4)?_0x92b10d+=String['fromCharCode'](0xff&_0x2d0e9e>>(-0x2*_0x81782a&0x6)):0x0){_0x4b5223=_0x5828cc['indexOf'](_0x4b5223);}for(let _0x349e95=0x0,_0x4434e2=_0x92b10d['length'];_0x349e95<_0x4434e2;_0x349e95++){_0x194e92+='%'+('00'+_0x92b10d['charCodeAt'](_0x349e95)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x194e92);};_0x10a5['cbeqOP']=_0x5d8951,_0x10a5['FRxafu']={},_0x10a5['RkqNtF']=!![];}const _0x4cbb75=_0x453148[0x0],_0x5db36f=_0x402dd8+_0x4cbb75,_0x5cbf62=_0x10a5['FRxafu'][_0x5db36f];return!_0x5cbf62?(_0x10a580=_0x10a5['cbeqOP'](_0x10a580),_0x10a5['FRxafu'][_0x5db36f]=_0x10a580):_0x10a580=_0x5cbf62,_0x10a580;}function getSortedQuality(_0x8ff978){const _0x10adef={_0x3f6a97:0x1a9,_0x3afbe1:0x19f,_0x133424:0x194,_0x18075d:0x19f,_0x43ffb9:0x19f,_0x50f963:0x189},_0x284c09=_0x2a0f0d;if(!_0x8ff978)return'Auto';const _0x3c1967=_0x8ff978['toLowerCase']();if(_0x3c1967[_0x284c09(0x19f)](_0x284c09(0x18e)))return'Auto';if(_0x3c1967['includes'](_0x284c09(_0x10adef._0x3f6a97))||_0x3c1967[_0x284c09(_0x10adef._0x3afbe1)]('4k')||_0x3c1967['includes'](_0x284c09(0x1a1)))return'​'+_0x8ff978;if(_0x3c1967['includes'](_0x284c09(_0x10adef._0x133424))||_0x3c1967[_0x284c09(_0x10adef._0x18075d)]('fhd'))return'​​'+_0x8ff978;if(_0x3c1967['includes'](_0x284c09(0x183))||_0x3c1967['includes']('hd'))return'​​​'+_0x8ff978;if(_0x3c1967['includes']('480')||_0x3c1967[_0x284c09(_0x10adef._0x43ffb9)]('sd'))return'​​​​'+_0x8ff978;if(_0x3c1967[_0x284c09(0x19f)]('360'))return'​​​​​'+_0x8ff978;return _0x284c09(_0x10adef._0x50f963)+_0x8ff978;}module['exports']={'getStreams':getStreams};
+/**
+ * NetMirror provider - uses relay proxy on the unblocked server
+ * All fetches go through: https://leotard-paddling-famine.ngrok-free.dev/proxy
+ * Headers are passed as URL params to avoid header forwarding issues
+ */
+const PROXY_BASE = 'https://leotard-paddling-famine.ngrok-free.dev/proxy?target=';
+
+async function proxyFetch(url, options = {}) {
+  const targetEncoded = encodeURIComponent(url);
+  let targetUrl = PROXY_BASE + targetEncoded;
+  
+  // Pass headers as URL params (cleaner than header forwarding)
+  const headers = options.headers || {};
+  if (headers.ott) targetUrl += '&ott=' + encodeURIComponent(headers.ott);
+  if (headers['x-requested-with']) targetUrl += '&xreq=' + encodeURIComponent(headers['x-requested-with']);
+  if (headers['User-Agent']) targetUrl += '&ua=' + encodeURIComponent(headers['User-Agent']);
+  if (headers.Referer) targetUrl += '&ref=' + encodeURIComponent(headers.Referer);
+
+  return fetch(targetUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+}
+
+const FALLBACK_NF_API = 'https://tv.imgcdn.kim/newtv';
+const OTT_SERVICES = [
+  { code: 'nf', name: 'Netflix' },
+  { code: 'pv', name: 'PrimeVideo' },
+  { code: 'hs', name: 'Hotstar' },
+];
+
+async function getNfMirrorApi() {
+  try {
+    const resp = await fetch('https://raw.githubusercontent.com/SaurabhKaperwan/Utils/refs/heads/main/urls.json');
+    const data = await resp.json();
+    return data.nfmirror || FALLBACK_NF_API;
+  } catch {
+    console.log('[NetMirror] Using fallback API URL');
+    return FALLBACK_NF_API;
+  }
+}
+
+async function generateM3u8(m3u8Url, headers = {}) {
+  try {
+    console.log('[NetMirror] Parsing master m3u8:', m3u8Url);
+    const resp = await proxyFetch(m3u8Url, { headers });
+    const text = await resp.text();
+    const baseUrl = m3u8Url.substring(0, m3u8Url.lastIndexOf('/') + 1);
+    const streams = [];
+    const regex = /#EXT-X-STREAM-INF:.*?RESOLUTION=(\d+x\d+).*?\n([^\n]+)/g;
+    let match;
+    while ((match = regex.exec(text)) !== null) {
+      const height = parseInt(match[1].split('x')[1]);
+      if (height < 720) continue;
+      const quality = height + 'p';
+      let streamUrl = match[2].trim();
+      if (!streamUrl.startsWith('http')) {
+        if (streamUrl.startsWith('/')) {
+          streamUrl = new URL(m3u8Url).origin + streamUrl;
+        } else {
+          streamUrl = baseUrl + streamUrl;
+        }
+      }
+      streams.push({ quality, url: streamUrl });
+    }
+    return streams;
+  } catch (err) {
+    console.warn('[NetMirror] Error parsing M3U8:', err.message);
+    return [];
+  }
+}
+
+function matchTitle(results, title) {
+  if (!results || !title) return null;
+  const lowerTitle = title.toLowerCase().trim();
+  return results.find(r => r.t && r.t.toLowerCase().trim() === lowerTitle) || null;
+}
+
+async function getStreams(id, type, season, episode, mediaTitle) {
+  console.log(`[NetMirror] Starting search for ${type} ${id} title="${mediaTitle || '?'}"`);
+  const streams = [];
+
+  try {
+    const apiBase = await getNfMirrorApi();
+    console.log('[NetMirror] Resolved API base:', apiBase);
+
+    for (const service of OTT_SERVICES) {
+      try {
+        console.log(`[NetMirror] Searching ${service.name} for "${mediaTitle}"`);
+        
+        const searchResp = await proxyFetch(
+          `${apiBase}/search.php?s=${encodeURIComponent(mediaTitle)}`,
+          { headers: { 'ott': service.code, 'x-requested-with': 'NetmirrorNewTV v1.0', 'User-Agent': 'Mozilla/5.0' } }
+        );
+        
+        // Check response
+        const text = await searchResp.text();
+        let searchData;
+        try { searchData = JSON.parse(text); } catch {
+          console.log(`[NetMirror] ${service.name} returned non-JSON, skipping`);
+          continue;
+        }
+        
+        const results = searchData.searchResult || [];
+        const match = matchTitle(results, mediaTitle);
+
+        if (!match || !match.id) {
+          console.log(`[NetMirror] No direct match on ${service.name}`);
+          continue;
+        }
+
+        let contentId = match.id;
+
+        if (type === 'tv' && season && episode) {
+          console.log(`[NetMirror] TV Match on ${service.name}, ID: ${contentId}, looking for S${season}E${episode}`);
+          const postResp = await proxyFetch(
+            `${apiBase}/post.php?id=${contentId}`,
+            { headers: { 'ott': service.code, 'x-requested-with': 'NetmirrorNewTV v1.0', 'User-Agent': 'Mozilla/5.0' } }
+          );
+          const postText = await postResp.text();
+          let postData;
+          try { postData = JSON.parse(postText); } catch { continue; }
+          
+          const seasons = postData.season || [];
+          const seasonStr = `Season ${season}`;
+          const seasonMatch = seasons.find(s => s.s && s.s.toString().includes(seasonStr));
+          if (!seasonMatch || !seasonMatch.id) {
+            console.log(`[NetMirror] Season ${season} not found on ${service.name}`);
+            continue;
+          }
+
+          let episodeId = null;
+          let page = 1;
+          while (!episodeId && page < 10) {
+            const epResp = await proxyFetch(
+              `${apiBase}/episodes.php?season_id=${seasonMatch.id}&page=${page}`,
+              { headers: { 'ott': service.code, 'x-requested-with': 'NetmirrorNewTV v1.0', 'User-Agent': 'Mozilla/5.0' } }
+            );
+            const epText = await epResp.text();
+            let epData;
+            try { epData = JSON.parse(epText); } catch { break; }
+            
+            const episodes = epData.episodes || [];
+            const epMatch = episodes.find(e => e.ep && parseInt(e.ep) === parseInt(episode));
+            if (epMatch && epMatch.id) { episodeId = epMatch.id; }
+            if (parseInt(epData.nextPageShow) !== 1) break;
+            page++;
+          }
+          if (!episodeId) { console.log(`[NetMirror] Episode ${episode} not found on ${service.name}`); continue; }
+          contentId = episodeId;
+        }
+
+        console.log(`[NetMirror] Fetching final stream payload for ID ${contentId} on ${service.name}`);
+        const playerResp = await proxyFetch(
+          `${apiBase}/player.php?id=${contentId}`,
+          { headers: { 'ott': service.code, 'x-requested-with': 'NetmirrorNewTV v1.0', 'User-Agent': 'Mozilla/5.0' } }
+        );
+        const playerText = await playerResp.text();
+        let playerData;
+        try { playerData = JSON.parse(playerText); } catch { continue; }
+
+        if (playerData && playerData.video_link) {
+          const videoUrl = playerData.video_link;
+          const isHls = videoUrl.includes('.m3u8');
+
+          streams.push({
+            name: service.name,
+            title: 'Auto',
+            url: videoUrl,
+            quality: 'Auto',
+            type: isHls ? 'hls' : (videoUrl.includes('.mp4') || videoUrl.includes('.mkv') ? 'video' : null),
+            headers: { Referer: playerData.referer || '', 'User-Agent': 'Mozilla/5.0' },
+            provider: 'netmirror',
+          });
+
+          if (isHls) {
+            try {
+              const qualities = await generateM3u8(videoUrl, {
+                Referer: playerData.referer || '',
+                'User-Agent': 'Mozilla/5.0',
+              });
+              qualities.forEach(q => {
+                streams.push({
+                  name: service.name,
+                  title: q.quality,
+                  url: q.url,
+                  quality: q.quality,
+                  type: 'hls',
+                  headers: { Referer: playerData.referer || '', 'User-Agent': 'Mozilla/5.0' },
+                  provider: 'netmirror',
+                });
+              });
+            } catch {}
+          }
+          console.log(`[NetMirror] SUCCESS: Captured link for ${service.name}`);
+        }
+      } catch (err) {
+        console.log(`[NetMirror] Error with ${service.name}:`, err.message);
+      }
+    }
+  } catch (err) {
+    console.error('[NetMirror] Error:', err.message);
+  }
+
+  console.log(`[NetMirror] Returning total ${streams.length} stream(s).`);
+  return streams.map(s => ({
+    ...s,
+    quality: s.quality === 'Auto' ? s.quality : '​​' + s.quality,
+  }));
+}
+
+module.exports = { getStreams };
