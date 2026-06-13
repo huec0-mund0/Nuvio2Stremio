@@ -215,13 +215,13 @@ async function handleRequest(req, res) {
             name: st.name && !st.name.startsWith('4KHDHub') ? '4KHDHub | ' + st.name : st.name,
           }));
           allSources.push(...fixed);
-        }), 25000) // 25s timeout - 4khdhubnew is slow (7s+ locally)
+        }), 35000) // 35s timeout - 4khdhubnew is slow (7s+ locally, more on Render cold start)
           .catch(() => {})
       );
     }
 
     // Overall timeout so Render doesn't kill us
-    await withTimeout(Promise.allSettled(tasks), 30000).catch(() => {});
+    await withTimeout(Promise.allSettled(tasks), 36000).catch(() => {});
     console.log(`[Nuvio] ${imdbId} → ${allSources.length} streams in ${Date.now()-start}ms`);
 
     return res.status(200).json({ streams: allSources });
