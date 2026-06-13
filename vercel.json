@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/addon.js": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/addon" }
+  ]
+}
