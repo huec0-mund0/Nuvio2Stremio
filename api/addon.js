@@ -118,7 +118,11 @@ async function handleRequest(req, res) {
         // Strip \r so $ assertions work in multiline regex
         const cleanText = text.replace(/\r/g, '');
         const rewritten = cleanText
+          // First rewrite inline URI="..." attributes in HLS tags (audio, subs, etc.)
+          .replace(/URI="(https?:\/\/[^"]+)"/g, (_m, url) => `URI="${addonBase}${encodeURIComponent(url)}"`)
+          // Then rewrite standalone full URLs
           .replace(/^(https?:\/\/[^\s]+)$/gm, (match) => addonBase + encodeURIComponent(match))
+          // Then rewrite relative paths
           .replace(/^([a-zA-Z0-9_\-./]+\.(ts|m3u8|m3u|key|m4s|js|jpg))$/gm, (match) => {
             const absUrl = baseUrl + match;
             return addonBase + encodeURIComponent(absUrl);
