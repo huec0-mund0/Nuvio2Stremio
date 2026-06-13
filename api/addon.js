@@ -92,7 +92,10 @@ async function handleRequest(req, res) {
   // Stream proxy — routes video/playlist requests through the tunnel
   // Stremio clients that don't respect stream.headers can still play
   if (path.startsWith('/proxy/')) {
-    const target = decodeURIComponent(path.slice(7));
+    const targetPath = path.slice(7);
+    // Reconstruct full target URL — query params may be in url.search
+    const rawTarget = targetPath + (url.search || '');
+    const target = decodeURIComponent(rawTarget);
     if (!target) return res.status(400).json({ error: 'missing target' });
 
     try {
