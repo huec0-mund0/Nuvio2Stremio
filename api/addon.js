@@ -2,10 +2,8 @@
  * Nuvio Streams Addon - Vercel serverless entry point
  * Routes: /manifest.json, /stream/:type/:id.json
  */
-const { getVideasyStreams } = require('../providers/videasy');
-const { getVidFastStreams } = require('../providers/vidfast');
-const { getMovieBoxStreams } = require('../providers/moviebox');
-const { getHDHub4uStreams } = require('../providers/hdhub4u');
+const { getStreams: getGoatAPIStreams } = require('../providers/goatapi');
+const { getStreams: getHDHub4uStreams } = require('../providers/hdhub4u');
 const cineMMProvider = require('../providers/cinemm');
 const manifest = require('../manifest.json');
 
@@ -65,20 +63,12 @@ async function handleRequest(req, res) {
 
     const allSources = [];
     const start = Date.now();
-    const ENABLED = process.env.PROVIDERS || 'videasy,vidfast,moviebox,hdhub4u,cinemm';
+    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,cinemm';
     const enabled = ENABLED.split(',').map(s => s.trim().toLowerCase());
 
     const tasks = [];
-    if (enabled.includes('videasy') && meta?.title) {
-      tasks.push(getVideasyStreams(meta.title, meta.year, meta.tmdbId, imdbId, season, episode)
-        .then(s => allSources.push(...s)));
-    }
-    if (enabled.includes('vidfast') && meta?.tmdbId) {
-      tasks.push(getVidFastStreams(meta.tmdbId, season, episode)
-        .then(s => allSources.push(...s)));
-    }
-    if (enabled.includes('moviebox') && meta?.tmdbId) {
-      tasks.push(getMovieBoxStreams(meta.tmdbId, type, season, episode)
+    if (enabled.includes('goatapi') && meta?.tmdbId) {
+      tasks.push(getGoatAPIStreams(meta.tmdbId, type, season, episode)
         .then(s => allSources.push(...s)));
     }
     if (enabled.includes('hdhub4u') && meta?.tmdbId) {
