@@ -7,7 +7,6 @@ const { getStreams: getHDHub4uStreams } = require('../providers/hdhub4u');
 const { getStreams: getPurStreamStreams } = require('../providers/purstream');
 const { getStreams: getNetMirrorStreams } = require('../providers/netmirror');
 const { getStreams: getZinkMoviesStreams } = require('../providers/zinkmovies');
-const cineMMProvider = require('../providers/cinemm');
 const { getStreams: getVixSrcStreams } = require('../providers/vixsrc');
 const manifest = require('../manifest.json');
 
@@ -100,7 +99,7 @@ async function handleRequest(req, res) {
 
     const allSources = [];
     const start = Date.now();
-    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies,cinemm,vixsrc';
+    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies,vixsrc';
     const enabled = ENABLED.split(',').map(s => s.trim().toLowerCase());
 
     const tasks = [];
@@ -133,12 +132,6 @@ async function handleRequest(req, res) {
     if (enabled.includes('zinkmovies') && meta?.tmdbId) {
       tasks.push(
         withTimeout(getZinkMoviesStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
-          .catch(() => {})
-      );
-    }
-    if (enabled.includes('cinemm')) {
-      tasks.push(
-        withTimeout(cineMMProvider.getStreams(meta?.tmdbId || imdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
           .catch(() => {})
       );
     }
