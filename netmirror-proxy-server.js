@@ -2,10 +2,12 @@
  * NetMirror proxy server - runs on Hermes machine (Nigerian IP, not blocked)
  * Exposed via ngrok so Render addon can reach it.
  * Forwards requests to tv.imgcdn.kim with required headers.
+ * Also provides 4KHDHub scraping endpoint (runs from Nigerian IP).
  */
 const http = require('http');
 const https = require('https');
 const url = require('url');
+const { getStreams: get4kHDHubStreams } = require('./providers/4khdhubnew.js');
 
 const PORT = process.env.PORT || 3333;
 
@@ -17,6 +19,33 @@ const server = http.createServer((req, res) => {
   if (req.method === 'OPTIONS') {
     res.writeHead(200);
     res.end();
+    return;
+  }
+
+  // 4KHDHub scraping endpoint (runs from Nigerian IP, not blocked)
+  if (req.url.startsWith('/4khdhub/stream')) {
+    const query = url.parse(req.url, true).query;
+    const tmdbId = query.tmdb;
+    const type = query.type || 'movie';
+    const season = parseInt(query.season) || 0;
+    const episode = parseInt(query.episode) || 0;
+
+    if (!tmdbId) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Missing ?tmdb= param' }));
+      return;
+    }
+
+    console.log(`[4KHDHub] Fetching tmdb=${tmdbId} type=${type} S${season}E${episode}`);
+    get4kHDHubStreams(tmdbId, type, season, episode)
+      .then(streams => {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ streams }));
+      })
+      .catch(err => {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: err.message }));
+      });
     return;
   }
 

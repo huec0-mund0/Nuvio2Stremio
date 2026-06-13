@@ -7,7 +7,6 @@ const { getStreams: getHDHub4uStreams } = require('../providers/hdhub4u');
 const { getStreams: getPurStreamStreams } = require('../providers/purstream');
 const { getStreams: getNetMirrorStreams } = require('../providers/netmirror');
 const { getStreams: getZinkMoviesStreams } = require('../providers/zinkmovies');
-const { getStreams: get4kHDHubStreams } = require('../providers/4khdhubnew');
 const manifest = require('../manifest.json');
 
 // ── Helpers ────────────────────────────────────────────────
@@ -205,23 +204,28 @@ async function handleRequest(req, res) {
     }
     if (enabled.includes('4khdhub') && meta?.tmdbId) {
       tasks.push(
-        withTimeout(get4kHDHubStreams(meta.tmdbId, type, season, episode).then(s => {
-          // 4KHDHub returns direct file URLs - proxy them through tunnel for geo-access
-          const addonBase = `https://nuvio2stremio.onrender.com/proxy/`;
-          const fixed = s.map(st => ({
+        withTimeout((async () => {
+          // Run 4khdhubnew scraper on Hermes (Nigeria IP) via tunnel to avoid blocking
+          const apiUrl = `https://proxy.rchimezie.com/4khdhub/stream?tmdb=${meta.tmdbId}&type=${type}&season=${season}&episode=${episode}`;
+          const res = await fetch(apiUrl);
+          if (!res.ok) return;
+          const data = await res.json();
+          const streams = data.streams || [];
+          // Proxy file URLs through the addon proxy for geo-access
+          const addonBase = `https://${req.headers.host}/proxy/`;
+          const fixed = streams.map(st => ({
             ...st,
-            // Route through addon proxy so TV in Nigeria can reach them
             url: st.url ? addonBase + encodeURIComponent(st.url) : st.url,
             name: st.name && !st.name.startsWith('4KHDHub') ? '4KHDHub | ' + st.name : st.name,
           }));
           allSources.push(...fixed);
-        }), 35000) // 35s timeout - 4khdhubnew is slow (7s+ locally, more on Render cold start)
+        })(), 30000)
           .catch(() => {})
       );
     }
 
     // Overall timeout so Render doesn't kill us
-    await withTimeout(Promise.allSettled(tasks), 36000).catch(() => {});
+    await withTimeout(Promise.allSettled(tasks), 30000).catch(() => {});
     console.log(`[Nuvio] ${imdbId} → ${allSources.length} streams in ${Date.now()-start}ms`);
 
     return res.status(200).json({ streams: allSources });
