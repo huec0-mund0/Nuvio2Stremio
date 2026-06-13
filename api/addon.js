@@ -1,5 +1,5 @@
 /**
- * Nuvio Streams Addon - Vercel serverless entry point
+ * Nuvio Streams Addon - Render serverless entry point
  * Routes: /manifest.json, /stream/:type/:id.json
  */
 const { getStreams: getGoatAPIStreams } = require('../providers/goatapi');
@@ -41,6 +41,14 @@ function TMDB_cache() {
 }
 const resolveMeta = TMDB_cache();
 
+/** Run a promise with a max duration — rejects if it takes too long */
+function withTimeout(promise, ms) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error(`timeout after ${ms}ms`)), ms))
+  ]);
+}
+
 // ── Route handler ───────────────────────────────────────────
 async function handleRequest(req, res) {
   const url = new URL(req.url, `http://${req.headers.host}`);
@@ -51,7 +59,7 @@ async function handleRequest(req, res) {
   res.setHeader('Access-Control-Allow-Headers', '*');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  // Debug: check provider reachability from this server
+  // Debug endpoint
   if (path === '/debug') {
     const results = {};
     const testUrls = [
@@ -91,32 +99,47 @@ async function handleRequest(req, res) {
     const enabled = ENABLED.split(',').map(s => s.trim().toLowerCase());
 
     const tasks = [];
+    const PROVIDER_TIMEOUT = 15000; // 15s per provider
+
     if (enabled.includes('goatapi') && meta?.tmdbId) {
-      tasks.push(getGoatAPIStreams(meta.tmdbId, type, season, episode)
-        .then(s => allSources.push(...s)));
+      tasks.push(
+        withTimeout(getGoatAPIStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
     }
     if (enabled.includes('hdhub4u') && meta?.tmdbId) {
-      tasks.push(getHDHub4uStreams(meta.tmdbId, type, season, episode)
-        .then(s => allSources.push(...s)));
+      tasks.push(
+        withTimeout(getHDHub4uStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
     }
     if (enabled.includes('purstream') && meta?.tmdbId) {
-      tasks.push(getPurStreamStreams(meta.tmdbId, type, season, episode)
-        .then(s => allSources.push(...s)));
+      tasks.push(
+        withTimeout(getPurStreamStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
     }
     if (enabled.includes('netmirror')) {
-      tasks.push(getNetMirrorStreams(meta?.tmdbId || imdbId, type, season, episode, meta?.title)
-        .then(s => allSources.push(...s)));
+      tasks.push(
+        withTimeout(getNetMirrorStreams(meta?.tmdbId || imdbId, type, season, episode, meta?.title).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
     }
     if (enabled.includes('zinkmovies') && meta?.tmdbId) {
-      tasks.push(getZinkMoviesStreams(meta.tmdbId, type, season, episode)
-        .then(s => allSources.push(...s)));
+      tasks.push(
+        withTimeout(getZinkMoviesStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
     }
     if (enabled.includes('cinemm')) {
-      tasks.push(cineMMProvider.getStreams(meta?.tmdbId || imdbId, type, season, episode)
-        .then(s => allSources.push(...s)));
+      tasks.push(
+        withTimeout(cineMMProvider.getStreams(meta?.tmdbId || imdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
     }
 
-    await Promise.allSettled(tasks);
+    // Overall timeout so Render doesn't kill us
+    await withTimeout(Promise.allSettled(tasks), 25000).catch(() => {});
     console.log(`[Nuvio] ${imdbId} → ${allSources.length} streams in ${Date.now()-start}ms`);
 
     return res.status(200).json({ streams: allSources });

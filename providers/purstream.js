@@ -7,6 +7,7 @@ const PURSTREAM_API = 'https://api.purstream.ch/api/v1';
 const PURSTREAM_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 const PURSTREAM_REFERER = 'https://purstream.ch/';
 const TMDB_KEY = 'f3d757824f08ea2cff45eb8f47ca3a1e';
+const FETCH_TIMEOUT = 10000; // 10s per individual request
 
 function cleanTitle(title) {
   if (!title) return '';
@@ -30,7 +31,7 @@ function extractYear(str) {
 async function getTmdbSearchMeta(tmdbId, type) {
   const mediaType = (type === 'tv' || type === 'series') ? 'tv' : 'movie';
   try {
-    const resp = await fetch(`https://api.themoviedb.org/3/${mediaType}/${tmdbId}?language=fr-FR&api_key=${TMDB_KEY}`);
+    const resp = await fetch(`https://api.themoviedb.org/3/${mediaType}/${tmdbId}?language=fr-FR&api_key=${TMDB_KEY}`, { signal: AbortSignal.timeout(FETCH_TIMEOUT) });
     if (!resp.ok) return null;
     const data = await resp.json();
     return {
@@ -49,7 +50,8 @@ async function findPurstreamId(title, type, year) {
 
   try {
     const resp = await fetch(searchUrl, {
-      headers: { 'User-Agent': PURSTREAM_UA, 'Referer': PURSTREAM_REFERER }
+      headers: { 'User-Agent': PURSTREAM_UA, 'Referer': PURSTREAM_REFERER },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT)
     });
     if (!resp.ok) return null;
 
@@ -86,7 +88,8 @@ async function findPurstreamId(title, type, year) {
 async function getMovieSources(id) {
   try {
     const resp = await fetch(`${PURSTREAM_API}/media/${id}/sheet`, {
-      headers: { 'User-Agent': PURSTREAM_UA, 'Referer': PURSTREAM_REFERER }
+      headers: { 'User-Agent': PURSTREAM_UA, 'Referer': PURSTREAM_REFERER },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT)
     });
     if (!resp.ok) return [];
     const data = await resp.json();
@@ -98,7 +101,8 @@ async function getMovieSources(id) {
 async function getEpisodeSources(id, season, episode) {
   try {
     const resp = await fetch(`${PURSTREAM_API}/stream/${id}/episode?season=${season || 1}&episode=${episode || 1}`, {
-      headers: { 'User-Agent': PURSTREAM_UA, 'Referer': PURSTREAM_REFERER }
+      headers: { 'User-Agent': PURSTREAM_UA, 'Referer': PURSTREAM_REFERER },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT)
     });
     if (!resp.ok) return [];
     const data = await resp.json();
