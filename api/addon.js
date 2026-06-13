@@ -102,12 +102,19 @@ async function handleRequest(req, res) {
         signal: AbortSignal.timeout(30000),
       });
 
-      // Forward relevant headers
-      if (resp.headers.get('content-type')) res.setHeader('Content-Type', resp.headers.get('content-type'));
+      // Forward relevant headers (except Content-Type — we'll set it after detection)
       if (resp.headers.get('content-length')) res.setHeader('Content-Length', resp.headers.get('content-length'));
 
       const text = await resp.text();
-      const ct = resp.headers.get('content-type') || '';
+      let ct = resp.headers.get('content-type') || '';
+
+      // Fix mislabeled video segments — freecdn disguises MPEG-TS as .js
+      if (target.includes('.js') && text.length > 4 && text.charCodeAt(0) === 0x47) {
+        ct = 'video/MP2T';
+      }
+
+      // Now set the corrected Content-Type
+      res.setHeader('Content-Type', ct);
 
       // For m3u8 playlists, rewrite segment URLs to go through proxy
       if (ct.includes('m3u8') || ct.includes('application/vnd.apple.mpegurl') || target.includes('.m3u8')) {
@@ -116,7 +123,7 @@ async function handleRequest(req, res) {
 
         const rewritten = text.replace(/^(https?:\/\/[^\s]+)$/gm, (match) => {
           return addonBase + encodeURIComponent(match);
-        }).replace(/^([a-zA-Z0-9_\-./]+\.(ts|m3u8|m3u|key|m4s))$/gm, (match) => {
+        }).replace(/^([a-zA-Z0-9_\-./]+\.(ts|m3u8|m3u|key|m4s|js))$/gm, (match) => {
           const absUrl = baseUrl + match;
           return addonBase + encodeURIComponent(absUrl);
         });
