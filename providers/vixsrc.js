@@ -549,9 +549,11 @@ async function getStreams(id, mediaType, season, episode, options = null) {
       return [];
     }
 
+    // Handle playlist URLs that already have query params (e.g. "?ub=1")
+    const separator = playlistInfo.url.includes('?') ? '&' : '?';
     const playlistUrl =
       `${playlistInfo.url}` +
-      `?token=${encodeURIComponent(playlistInfo.token)}` +
+      `${separator}token=${encodeURIComponent(playlistInfo.token)}` +
       `&expires=${encodeURIComponent(playlistInfo.expires)}` +
       `&h=1&lang=en`;
 
