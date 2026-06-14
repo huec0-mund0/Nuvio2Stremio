@@ -148,6 +148,10 @@ async function handleRequest(req, res) {
       if (buffer.length > 4 && buffer[0] === 0x47) {
         ct = 'video/MP2T';
       }
+      // Detect Matroska (MKV) for ExoPlayer compatibility
+      if (buffer.length > 4 && buffer[0] === 0x1A && buffer[1] === 0x45 && buffer[2] === 0xDF && buffer[3] === 0xA3) {
+        ct = 'video/x-matroska';
+      }
 
       res.setHeader('Content-Type', ct);
       return res.status(200).send(buffer);
