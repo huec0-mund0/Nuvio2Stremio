@@ -9,6 +9,7 @@ const { getStreams: getNetMirrorStreams } = require('../providers/netmirror');
 const { getStreams: getZinkMoviesStreams } = require('../providers/zinkmovies');
 const { getStreams: getMovixStreams } = require('../providers/movix');
 const { getStreams: getDahmerMoviesStreams } = require('../providers/dahmermovies');
+const { getStreams: getDahmerMovies4kStreams } = require('../providers/dahmermovies-4k');
 const { getStreams: getNakiosStreams } = require('../providers/nakios');
 const { getStreams: getMultiVidStreams } = require('../providers/multivid');
 const { getStreams: getPeachifyStreams } = require('../providers/peachify');
@@ -182,7 +183,7 @@ async function handleRequest(req, res) {
 
     const allSources = [];
     const start = Date.now();
-    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies,movix,dahmermovies,nakios,multivid,peachify';
+    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies,movix,dahmermovies,dahmermovies-4k,nakios,multivid,peachify';
     const enabled = ENABLED.split(',').map(s => s.trim().toLowerCase());
 
     const tasks = [];
@@ -227,6 +228,12 @@ async function handleRequest(req, res) {
     if (enabled.includes('dahmermovies') && meta?.tmdbId) {
       tasks.push(
         withTimeout(getDahmerMoviesStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
+    }
+    if (enabled.includes('dahmermovies-4k') && meta?.tmdbId) {
+      tasks.push(
+        withTimeout(getDahmerMovies4kStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
           .catch(() => {})
       );
     }
