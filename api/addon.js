@@ -115,9 +115,16 @@ async function handleRequest(req, res) {
         const baseUrl = target.substring(0, target.lastIndexOf('/') + 1);
         const addonBase = `https://${req.headers.host}/proxy/`;
 
-        // Strip \r so $ assertions work in multiline regex
+        // Strip \\r so $ assertions work in multiline regex
         const cleanText = text.replace(/\r/g, '');
-        const rewritten = cleanText
+
+        // Inject EXT-X-VERSION if missing (needed for ExoPlayer with alternate audio)
+        let versioned = cleanText;
+        if (!versioned.includes('EXT-X-VERSION')) {
+          versioned = versioned.replace('#EXTM3U\n', '#EXTM3U\n#EXT-X-VERSION:4\n');
+        }
+
+        const rewritten = versioned
           // First rewrite inline URI="..." attributes in HLS tags (audio, subs, etc.)
           .replace(/URI="(https?:\/\/[^"]+)"/g, (_m, url) => `URI="${addonBase}${encodeURIComponent(url)}"`)
           // Also rewrite inline URI="/absolute/path" to full proxy URL
