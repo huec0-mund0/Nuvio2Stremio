@@ -634,13 +634,16 @@ async function getStreams(id, mediaType, season, episode, options = null) {
     const stream = {
       name: `🎦 VixSrc | ${quality} • ${audioLabel}`,
       title,
-      url: STREAM_PROXY_BASE + '/proxy/' + encodeURIComponent(playlistUrl),
+      // Return direct playlist URL — the tokens are long-lived (60 days) and
+      // the CDN (vix-content.net) isn't Cloudflare-blocked. ExoPlayer on
+      // Android handles direct HLS better than proxied streams.
+      url: playlistUrl,
       easyProxySourceUrl: embedUrl,
       quality: quality.toLowerCase().includes("p") ? quality : "1080p",
       type: "hls",
       headers: playlistHeaders,
       behaviorHints: {
-        notWebReady: false,
+        notWebReady: true,
       },
     };
 
