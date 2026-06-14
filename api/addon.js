@@ -186,7 +186,7 @@ async function handleRequest(req, res) {
     const enabled = ENABLED.split(',').map(s => s.trim().toLowerCase());
 
     const tasks = [];
-    const PROVIDER_TIMEOUT = 15000; // 15s per provider
+    const PROVIDER_TIMEOUT = 25000; // 25s per provider
 
     if (enabled.includes('goatapi') && meta?.tmdbId) {
       tasks.push(
@@ -250,7 +250,7 @@ async function handleRequest(req, res) {
     }
 
     // Overall timeout so Render doesn't kill us
-    await withTimeout(Promise.allSettled(tasks), 30000).catch(() => {});
+    await withTimeout(Promise.allSettled(tasks), 45000).catch(() => {});
     console.log(`[Nuvio] ${imdbId} → ${allSources.length} streams in ${Date.now()-start}ms`);
 
     return res.status(200).json({ streams: allSources });
