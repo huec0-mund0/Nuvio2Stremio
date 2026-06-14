@@ -553,7 +553,7 @@ async function getStreams(id, mediaType, season, episode, options = null) {
       `${playlistInfo.url}` +
       `?token=${encodeURIComponent(playlistInfo.token)}` +
       `&expires=${encodeURIComponent(playlistInfo.expires)}` +
-      `&h=1&lang=it`;
+      `&h=1&lang=en`;
 
     const playlistHeaders = getPlaylistHeaders(embedUrl);
 

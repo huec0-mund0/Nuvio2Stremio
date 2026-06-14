@@ -1,7 +1,7 @@
 {
   "name": "Nuvio Streams",
   "version": "1.0.0",
-  "description": "Streaming addon with GoatAPI, HDHub4u, NetMirror, PurStream, ZinkMovies, 4KHDHub & 4KHDHubNew",
+  "description": "Streaming addon with GoatAPI, HDHub4u, NetMirror, PurStream, ZinkMovies, VixSrc",
   "id": "com.nuvio.streams",
   "resources": ["stream"],
   "types": ["movie", "series"],

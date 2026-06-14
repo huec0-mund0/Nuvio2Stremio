@@ -7,6 +7,7 @@ const { getStreams: getHDHub4uStreams } = require('../providers/hdhub4u');
 const { getStreams: getPurStreamStreams } = require('../providers/purstream');
 const { getStreams: getNetMirrorStreams } = require('../providers/netmirror');
 const { getStreams: getZinkMoviesStreams } = require('../providers/zinkmovies');
+const { getStreams: getVixSrcStreams } = require('../providers/vixsrc');
 const manifest = require('../manifest.json');
 
 // ── Helpers ────────────────────────────────────────────────
@@ -170,7 +171,7 @@ async function handleRequest(req, res) {
 
     const allSources = [];
     const start = Date.now();
-    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies,4khdhub';
+    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies,vixsrc';
     const enabled = ENABLED.split(',').map(s => s.trim().toLowerCase());
 
     const tasks = [];
@@ -206,24 +207,9 @@ async function handleRequest(req, res) {
           .catch(() => {})
       );
     }
-    if (enabled.includes('4khdhub') && meta?.tmdbId) {
+    if (enabled.includes('vixsrc') && meta?.tmdbId) {
       tasks.push(
-        withTimeout((async () => {
-          // Run 4khdhubnew scraper on Hermes (Nigeria IP) via tunnel to avoid blocking
-          const apiUrl = `https://proxy.rchimezie.com/4khdhub/stream?tmdb=${meta.tmdbId}&type=${type}&season=${season}&episode=${episode}`;
-          const res = await fetch(apiUrl);
-          if (!res.ok) return;
-          const data = await res.json();
-          const streams = data.streams || [];
-          // Proxy file URLs through the addon proxy for geo-access
-          const addonBase = `https://${req.headers.host}/proxy/`;
-          const fixed = streams.map(st => ({
-            ...st,
-            url: st.url ? addonBase + encodeURIComponent(st.url) : st.url,
-            name: st.name && !st.name.startsWith('4KHDHub') ? '4KHDHub | ' + st.name : st.name,
-          }));
-          allSources.push(...fixed);
-        })(), 30000)
+        withTimeout(getVixSrcStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
           .catch(() => {})
       );
     }
