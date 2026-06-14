@@ -4,16 +4,13 @@ console.log('[DahmerMovies] Initializing Scraper');
 const TMDB_API_KEY = "439c478a771f35c05022f9feabcca01c";
 const DAHMER_MOVIES_API = 'https://a.111477.xyz';
 const DAHMER_WORKER_API = 'https://p.111477.xyz/bulk?u=';
-// Tunnel via Hermes (Nigeria IP) to avoid Cloudflare blocks from Render
-const PROXY_TUNNEL = 'https://proxy.rchimezie.com/?target=';
-const PROXY_REF = '&ref=' + encodeURIComponent(DAHMER_MOVIES_API + '/');
-const PROXY_ORIGIN = '&origin=' + encodeURIComponent(DAHMER_MOVIES_API);
 
 async function makeRequest(url) {
     try {
-        return await fetch(PROXY_TUNNEL + encodeURIComponent(url) + PROXY_REF + PROXY_ORIGIN, {
+        return await fetch(url, {
             headers: { 
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+                'Referer': DAHMER_MOVIES_API + '/'
             }
         });
     } catch (e) { return { ok: false }; }
