@@ -7,7 +7,6 @@ const { getStreams: getHDHub4uStreams } = require('../providers/hdhub4u');
 const { getStreams: getPurStreamStreams } = require('../providers/purstream');
 const { getStreams: getNetMirrorStreams } = require('../providers/netmirror');
 const { getStreams: getZinkMoviesStreams } = require('../providers/zinkmovies');
-const { getStreams: getVixSrcStreams } = require('../providers/vixsrc');
 const manifest = require('../manifest.json');
 
 // ── Helpers ────────────────────────────────────────────────
@@ -66,10 +65,6 @@ async function handleRequest(req, res) {
       { name: 'NetMirror API', url: 'https://tv.imgcdn.kim/newtv/search.php?s=Deadpool', headers: {'User-Agent': 'Mozilla/5.0','x-requested-with':'NetmirrorNewTV v1.0'} },
       { name: 'ZinkMovies', url: 'https://new1.zinkmovies.foo', headers: {} },
       { name: 'GoatAPI', url: 'https://api.ghpool.xyz/goatapi/search?tmdb=123&type=movie', headers: {} },
-      { name: 'VixSrc API', url: 'https://vixsrc.to/api/movie/550', headers: {'User-Agent': 'Mozilla/5.0','Referer': 'https://vixsrc.to/'} },
-      { name: 'VixSrc Embed', url: 'https://vixsrc.to/', headers: {'User-Agent': 'Mozilla/5.0'} },
-      { name: 'VixSrc via Proxy', url: 'https://proxy.rchimezie.com/?target=' + encodeURIComponent('https://vixsrc.to/api/movie/550'), headers: {'User-Agent': 'Mozilla/5.0'} },
-      { name: 'VixSrc via Proxy (embed)', url: 'https://proxy.rchimezie.com/?target=' + encodeURIComponent('https://vixsrc.to/embed/170060?token=test'), headers: {'User-Agent': 'Mozilla/5.0'} },
     ];
     for (const t of testUrls) {
       const r = { status: null, error: null, body_preview: null };
@@ -182,7 +177,7 @@ async function handleRequest(req, res) {
 
     const allSources = [];
     const start = Date.now();
-    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies,vixsrc';
+    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies';
     const enabled = ENABLED.split(',').map(s => s.trim().toLowerCase());
 
     const tasks = [];
@@ -215,12 +210,6 @@ async function handleRequest(req, res) {
     if (enabled.includes('zinkmovies') && meta?.tmdbId) {
       tasks.push(
         withTimeout(getZinkMoviesStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
-          .catch(() => {})
-      );
-    }
-    if (enabled.includes('vixsrc') && meta?.tmdbId) {
-      tasks.push(
-        withTimeout(getVixSrcStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
           .catch(() => {})
       );
     }
