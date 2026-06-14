@@ -7,6 +7,11 @@ const { getStreams: getHDHub4uStreams } = require('../providers/hdhub4u');
 const { getStreams: getPurStreamStreams } = require('../providers/purstream');
 const { getStreams: getNetMirrorStreams } = require('../providers/netmirror');
 const { getStreams: getZinkMoviesStreams } = require('../providers/zinkmovies');
+const { getStreams: getMovixStreams } = require('../providers/movix');
+const { getStreams: getDahmerMoviesStreams } = require('../providers/dahmermovies');
+const { getStreams: getNakiosStreams } = require('../providers/nakios');
+const { getStreams: getMultiVidStreams } = require('../providers/multivid');
+const { getStreams: getPeachifyStreams } = require('../providers/peachify');
 const manifest = require('../manifest.json');
 
 // ── Helpers ────────────────────────────────────────────────
@@ -177,7 +182,7 @@ async function handleRequest(req, res) {
 
     const allSources = [];
     const start = Date.now();
-    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies';
+    const ENABLED = process.env.PROVIDERS || 'goatapi,hdhub4u,purstream,netmirror,zinkmovies,movix,dahmermovies,nakios,multivid,peachify';
     const enabled = ENABLED.split(',').map(s => s.trim().toLowerCase());
 
     const tasks = [];
@@ -210,6 +215,36 @@ async function handleRequest(req, res) {
     if (enabled.includes('zinkmovies') && meta?.tmdbId) {
       tasks.push(
         withTimeout(getZinkMoviesStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
+    }
+    if (enabled.includes('movix') && meta?.tmdbId) {
+      tasks.push(
+        withTimeout(getMovixStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
+    }
+    if (enabled.includes('dahmermovies') && meta?.tmdbId) {
+      tasks.push(
+        withTimeout(getDahmerMoviesStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
+    }
+    if (enabled.includes('nakios') && meta?.tmdbId) {
+      tasks.push(
+        withTimeout(getNakiosStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
+    }
+    if (enabled.includes('multivid') && meta?.tmdbId) {
+      tasks.push(
+        withTimeout(getMultiVidStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
+          .catch(() => {})
+      );
+    }
+    if (enabled.includes('peachify') && meta?.tmdbId) {
+      tasks.push(
+        withTimeout(getPeachifyStreams(meta.tmdbId, type, season, episode).then(s => allSources.push(...s)), PROVIDER_TIMEOUT)
           .catch(() => {})
       );
     }
