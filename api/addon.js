@@ -134,6 +134,10 @@ async function handleRequest(req, res) {
             const absUrl = `${targetUrl.protocol}//${targetUrl.host}/${path}`;
             return `URI="${addonBase}${encodeURIComponent(absUrl)}"`;
           })
+          // Strip subtitle tracks (ExoPlayer struggles with 45 subtitle renditions)
+          .replace(/^#EXT-X-MEDIA:TYPE=SUBTITLES.*\n/gm, '')
+          // Remove SUBTITLES="subs" from STREAM-INF lines  
+          .replace(/,SUBTITLES="subs"/g, '')
           // Then rewrite standalone full URLs
           .replace(/^(https?:\/\/[^\s]+)$/gm, (match) => addonBase + encodeURIComponent(match))
           // Then rewrite relative paths
